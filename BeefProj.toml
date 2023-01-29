@@ -1,0 +1,19 @@
+FileVersion = 1
+
+[Project]
+Name = "OpenAL_Soft"
+TargetType = "BeefLib"
+StartupObject = "OpenAL_Soft.Program"
+
+[Configs.Debug.Win64]
+BuildCommandsOnCompile = "IfFilesChanged"
+LibPaths = ["$(ProjectDir)/build/bin/Release/OpenAL32.lib"]
+
+[Configs.Release.Win64]
+LibPaths = ["$(ProjectDir)/build/bin/Release/OpenAL32.lib"]
+
+[Configs.Paranoid.Win64]
+LibPaths = ["$(ProjectDir)/build/bin/Release/OpenAL32.lib"]
+
+[Configs.Test.Win64]
+LibPaths = ["$(ProjectDir)/build/bin/Release/OpenAL32.lib"]
