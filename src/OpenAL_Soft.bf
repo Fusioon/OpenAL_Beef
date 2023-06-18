@@ -109,6 +109,8 @@ namespace OpenAL
 		public typealias ALCsizei = int32;
 		public typealias ALCuint = uint32;
 
+#if !OPENAL_DYNLOAD
+
 		[CLink]
 		public static extern ALCcontext* alcCreateContext(ALCdevice *device, ALCint *attrlist);
 
@@ -168,6 +170,52 @@ namespace OpenAL
 
 		[CLink]
 		public static extern void alcCaptureSamples(ALCdevice *device, ALCvoid *buffer, ALCsizei samples);
+
+#endif
+
+		/*
+			Runtime loader function pointer definitions
+		*/
+
+		public function ALCcontext* PFN_alcCreateContext(ALCdevice *device, ALCint *attrlist);
+
+		public function ALCboolean PFN_alcMakeContextCurrent(ALCcontext *context);
+
+		public function void PFN_alcProcessContext(ALCcontext *context);
+
+		public function void PFN_alcSuspendContext(ALCcontext *context);
+
+		public function void PFN_alcDestroyContext(ALCcontext *context);
+
+		public function ALCcontext* PFN_alcGetCurrentContext();
+
+		public function ALCdevice* PFN_alcGetContextsDevice(ALCcontext *context);
+
+		public function ALCdevice* PFN_alcOpenDevice(ALCchar *devicename);
+
+		public function ALCboolean PFN_alcCloseDevice(ALCdevice *device);
+
+		public function ALCenum PFN_alcGetError(ALCdevice *device);
+
+		public function ALCboolean PFN_alcIsExtensionPresent(ALCdevice *device, ALCchar *extname);
+
+		public function ALCvoid* PFN_alcGetProcAddress(ALCdevice *device, ALCchar *funcname);
+
+		public function ALCenum PFN_alcGetEnumValue(ALCdevice *device, ALCchar *enumname);
+
+		public function ALCchar* PFN_alcGetString(ALCdevice *device, ALCenum param);
+
+		public function void PFN_alcGetIntegerv(ALCdevice *device, ALCenum param, ALCsizei size, ALCint *values);
+
+		public function ALCdevice* PFN_alcCaptureOpenDevice(ALCchar *devicename, ALCuint frequency, ALCenum format, ALCsizei buffersize);
+
+		public function ALCboolean PFN_alcCaptureCloseDevice(ALCdevice *device);
+
+		public function void PFN_alcCaptureStart(ALCdevice *device);
+
+		public function void PFN_alcCaptureStop(ALCdevice *device);
+
+		public function void PFN_alcCaptureSamples(ALCdevice *device, ALCvoid *buffer, ALCsizei samples);
 
 #endregion ALC
 
@@ -542,6 +590,8 @@ namespace OpenAL
 		public typealias ALchar = char8;
 		public typealias ALvoid = void;
 
+#if !OPENAL_DYNLOAD
+
 		[CLink]
 		public static extern void alDopplerFactor(ALfloat value);
 
@@ -761,6 +811,158 @@ namespace OpenAL
 		[CLink]
 		public static extern void alGetBufferiv(ALuint buffer, ALenum param, ALint *values);
 
+#endif
+
+		/*
+		 Runtime loader function definitions
+		*/
+		
+		public function void PFN_alDopplerFactor(ALfloat vPFN_alue);
+
+		public function void PFN_alDopplerVelocity(ALfloat vPFN_alue);
+
+		public function void PFN_alSpeedOfSound(ALfloat vPFN_alue);
+
+		public function void PFN_alDistanceModel(ALenum distanceModel);
+
+		public function void PFN_alEnable(ALenum capability);
+
+		public function void PFN_alDisable(ALenum capability);
+
+		public function ALboolean PFN_alIsEnabled(ALenum capability);
+
+		public function ALchar* PFN_alGetString(ALenum param);
+
+		public function void PFN_alGetBooleanv(ALenum param, ALboolean *vPFN_alues);
+
+		public function void PFN_alGetIntegerv(ALenum param, ALint *vPFN_alues);
+
+		public function void PFN_alGetFloatv(ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alGetDoublev(ALenum param, ALdouble *vPFN_alues);
+
+		public function ALboolean PFN_alGetBoolean(ALenum param);
+
+		public function ALint PFN_alGetInteger(ALenum param);
+
+		public function ALfloat PFN_alGetFloat(ALenum param);
+
+		public function ALdouble PFN_alGetDouble(ALenum param);
+
+		public function ALenum PFN_alGetError();
+
+		public function ALboolean PFN_alIsExtensionPresent(ALchar *extname);
+
+		public function void* PFN_alGetProcAddress(ALchar *fname);
+
+		public function ALenum PFN_alGetEnumValue(ALchar *ename);
+
+		public function void PFN_alListenerf(ALenum param, ALfloat vPFN_alue);
+
+		public function void PFN_alListener3f(ALenum param, ALfloat vPFN_alue1, ALfloat vPFN_alue2, ALfloat vPFN_alue3);
+
+		public function void PFN_alListenerfv(ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alListeneri(ALenum param, ALint vPFN_alue);
+
+		public function void PFN_alListener3i(ALenum param, ALint vPFN_alue1, ALint vPFN_alue2, ALint vPFN_alue3);
+
+		public function void PFN_alListeneriv(ALenum param, ALint *vPFN_alues);
+
+		public function void PFN_alGetListenerf(ALenum param, ALfloat *vPFN_alue);
+
+		public function void PFN_alGetListener3f(ALenum param, ALfloat *vPFN_alue1, ALfloat *vPFN_alue2, ALfloat *vPFN_alue3);
+
+		public function void PFN_alGetListenerfv(ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alGetListeneri(ALenum param, ALint *vPFN_alue);
+
+		public function void PFN_alGetListener3i(ALenum param, ALint *vPFN_alue1, ALint *vPFN_alue2, ALint *vPFN_alue3);
+
+		public function void PFN_alGetListeneriv(ALenum param, ALint *vPFN_alues);
+
+		public function void PFN_alGenSources(ALsizei n, ALuint *sources);
+
+		public function void PFN_alDeleteSources(ALsizei n, ALuint *sources);
+
+		public function ALboolean PFN_alIsSource(ALuint source);
+
+		public function void PFN_alSourcef(ALuint source, ALenum param, ALfloat vPFN_alue);
+
+		public function void PFN_alSource3f(ALuint source, ALenum param, ALfloat vPFN_alue1, ALfloat vPFN_alue2, ALfloat vPFN_alue3);
+
+		public function void PFN_alSourcefv(ALuint source, ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alSourcei(ALuint source, ALenum param, ALint vPFN_alue);
+
+		public function void PFN_alSource3i(ALuint source, ALenum param, ALint vPFN_alue1, ALint vPFN_alue2, ALint vPFN_alue3);
+
+		public function void PFN_alSourceiv(ALuint source, ALenum param, ALint *vPFN_alues);
+
+		public function void PFN_alGetSourcef(ALuint source, ALenum param, ALfloat *vPFN_alue);
+
+		public function void PFN_alGetSource3f(ALuint source, ALenum param, ALfloat *vPFN_alue1, ALfloat *vPFN_alue2, ALfloat *vPFN_alue3);
+
+		public function void PFN_alGetSourcefv(ALuint source, ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alGetSourcei(ALuint source,  ALenum param, ALint *vPFN_alue);
+
+		public function void PFN_alGetSource3i(ALuint source, ALenum param, ALint *vPFN_alue1, ALint *vPFN_alue2, ALint *vPFN_alue3);
+
+		public function void PFN_alGetSourceiv(ALuint source,  ALenum param, ALint *vPFN_alues);
+
+		public function void PFN_alSourcePlayv(ALsizei n, ALuint *sources);
+
+		public function void PFN_alSourceStopv(ALsizei n, ALuint *sources);
+
+		public function void PFN_alSourceRewindv(ALsizei n, ALuint *sources);
+
+		public function void PFN_alSourcePausev(ALsizei n, ALuint *sources);
+
+		public function void PFN_alSourcePlay(ALuint source);
+
+		public function void PFN_alSourceStop(ALuint source);
+
+		public function void PFN_alSourceRewind(ALuint source);
+
+		public function void PFN_alSourcePause(ALuint source);
+
+		public function void PFN_alSourceQueueBuffers(ALuint source, ALsizei nb, ALuint *buffers);
+
+		public function void PFN_alSourceUnqueueBuffers(ALuint source, ALsizei nb, ALuint *buffers);
+
+		public function void PFN_alGenBuffers(ALsizei n, ALuint *buffers);
+
+		public function void PFN_alDeleteBuffers(ALsizei n, ALuint *buffers);
+
+		public function ALboolean PFN_alIsBuffer(ALuint buffer);
+
+		public function void PFN_alBufferData(ALuint buffer, ALenum format, ALvoid *data, ALsizei size, ALsizei freq);
+
+		public function void PFN_alBufferf(ALuint buffer, ALenum param, ALfloat vPFN_alue);
+
+		public function void PFN_alBuffer3f(ALuint buffer, ALenum param, ALfloat vPFN_alue1, ALfloat vPFN_alue2, ALfloat vPFN_alue3);
+
+		public function void PFN_alBufferfv(ALuint buffer, ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alBufferi(ALuint buffer, ALenum param, ALint vPFN_alue);
+
+		public function void PFN_alBuffer3i(ALuint buffer, ALenum param, ALint vPFN_alue1, ALint vPFN_alue2, ALint vPFN_alue3);
+
+		public function void PFN_alBufferiv(ALuint buffer, ALenum param, ALint *vPFN_alues);
+
+		public function void PFN_alGetBufferf(ALuint buffer, ALenum param, ALfloat *vPFN_alue);
+
+		public function void PFN_alGetBuffer3f(ALuint buffer, ALenum param, ALfloat *vPFN_alue1, ALfloat *vPFN_alue2, ALfloat *vPFN_alue3);
+
+		public function void PFN_alGetBufferfv(ALuint buffer, ALenum param, ALfloat *vPFN_alues);
+
+		public function void PFN_alGetBufferi(ALuint buffer, ALenum param, ALint *vPFN_alue);
+
+		public function void PFN_alGetBuffer3i(ALuint buffer, ALenum param, ALint *vPFN_alue1, ALint *vPFN_alue2, ALint *vPFN_alue3);
+
+		public function void PFN_alGetBufferiv(ALuint buffer, ALenum param, ALint *vPFN_alues);
+
 #endregion SOURCE
 
 		public enum InitError
@@ -769,24 +971,340 @@ namespace OpenAL
 			Context,
 		}
 
-		public static Result<ALCdevice*, InitError> InitAL(char8*** argv, int32* argc)
+		// ALC
+		public static PFN_alcCreateContext alcCreateContextFn;
+		public static PFN_alcMakeContextCurrent alcMakeContextCurrentFn;
+		public static PFN_alcProcessContext alcProcessContextFn;
+		public static PFN_alcSuspendContext alcSuspendContextFn;
+		public static PFN_alcDestroyContext alcDestroyContextFn;
+		public static PFN_alcGetCurrentContext alcGetCurrentContextFn;
+		public static PFN_alcGetContextsDevice alcGetContextsDeviceFn;
+		public static PFN_alcOpenDevice alcOpenDeviceFn;
+		public static PFN_alcCloseDevice alcCloseDeviceFn;
+		public static PFN_alcGetError alcGetErrorFn;
+		public static PFN_alcIsExtensionPresent alcIsExtensionPresentFn;
+		public static PFN_alcGetProcAddress alcGetProcAddressFn;
+		public static PFN_alcGetEnumValue alcGetEnumValueFn;
+		public static PFN_alcGetString alcGetStringFn;
+		public static PFN_alcGetIntegerv alcGetIntegervFn;
+		public static PFN_alcCaptureOpenDevice alcCaptureOpenDeviceFn;
+		public static PFN_alcCaptureCloseDevice alcCaptureCloseDeviceFn;
+		public static PFN_alcCaptureStart alcCaptureStartFn;
+		public static PFN_alcCaptureStop alcCaptureStopFn;
+		public static PFN_alcCaptureSamples alcCaptureSamplesFn;
+
+		// AL
+
+		public static PFN_alDopplerFactor alDopplerFactorFn;
+		public static PFN_alDopplerVelocity alDopplerVelocityFn;
+		public static PFN_alSpeedOfSound alSpeedOfSoundFn;
+		public static PFN_alDistanceModel alDistanceModelFn;
+		public static PFN_alEnable alEnableFn;
+		public static PFN_alDisable alDisableFn;
+		public static PFN_alIsEnabled alIsEnabledFn;
+		public static PFN_alGetString alGetStringFn;
+		public static PFN_alGetBooleanv alGetBooleanvFn;
+		public static PFN_alGetIntegerv alGetIntegervFn;
+		public static PFN_alGetFloatv alGetFloatvFn;
+		public static PFN_alGetDoublev alGetDoublevFn;
+		public static PFN_alGetBoolean alGetBooleanFn;
+		public static PFN_alGetInteger alGetIntegerFn;
+		public static PFN_alGetFloat alGetFloatFn;
+		public static PFN_alGetDouble alGetDoubleFn;
+		public static PFN_alGetError alGetErrorFn;
+		public static PFN_alIsExtensionPresent alIsExtensionPresentFn;
+		public static PFN_alGetProcAddress alGetProcAddressFn;
+		public static PFN_alGetEnumValue alGetEnumValueFn;
+		public static PFN_alListenerf alListenerfFn;
+		public static PFN_alListener3f alListener3fFn;
+		public static PFN_alListenerfv alListenerfvFn;
+		public static PFN_alListeneri alListeneriFn;
+		public static PFN_alListener3i alListener3iFn;
+		public static PFN_alListeneriv alListenerivFn;
+		public static PFN_alGetListenerf alGetListenerfFn;
+		public static PFN_alGetListener3f alGetListener3fFn;
+		public static PFN_alGetListenerfv alGetListenerfvFn;
+		public static PFN_alGetListeneri alGetListeneriFn;
+		public static PFN_alGetListener3i alGetListener3iFn;
+		public static PFN_alGetListeneriv alGetListenerivFn;
+		public static PFN_alGenSources alGenSourcesFn;
+		public static PFN_alDeleteSources alDeleteSourcesFn;
+		public static PFN_alIsSource alIsSourceFn;
+		public static PFN_alSourcef alSourcefFn;
+		public static PFN_alSource3f alSource3fFn;
+		public static PFN_alSourcefv alSourcefvFn;
+		public static PFN_alSourcei alSourceiFn;
+		public static PFN_alSource3i alSource3iFn;
+		public static PFN_alSourceiv alSourceivFn;
+		public static PFN_alGetSourcef alGetSourcefFn;
+		public static PFN_alGetSource3f alGetSource3fFn;
+		public static PFN_alGetSourcefv alGetSourcefvFn;
+		public static PFN_alGetSourcei alGetSourceiFn;
+		public static PFN_alGetSource3i alGetSource3iFn;
+		public static PFN_alGetSourceiv alGetSourceivFn;
+		public static PFN_alSourcePlayv alSourcePlayvFn;
+		public static PFN_alSourceStopv alSourceStopvFn;
+		public static PFN_alSourceRewindv alSourceRewindvFn;
+		public static PFN_alSourcePausev alSourcePausevFn;
+		public static PFN_alSourcePlay alSourcePlayFn;
+		public static PFN_alSourceStop alSourceStopFn;
+		public static PFN_alSourceRewind alSourceRewindFn;
+		public static PFN_alSourcePause alSourcePauseFn;
+		public static PFN_alSourceQueueBuffers alSourceQueueBuffersFn;
+		public static PFN_alSourceUnqueueBuffers alSourceUnqueueBuffersFn;
+		public static PFN_alGenBuffers alGenBuffersFn;
+		public static PFN_alDeleteBuffers alDeleteBuffersFn;
+		public static PFN_alIsBuffer alIsBufferFn;
+		public static PFN_alBufferData alBufferDataFn;
+		public static PFN_alBufferf alBufferfFn;
+		public static PFN_alBuffer3f alBuffer3fFn;
+		public static PFN_alBufferfv alBufferfvFn;
+		public static PFN_alBufferi alBufferiFn;
+		public static PFN_alBuffer3i alBuffer3iFn;
+		public static PFN_alBufferiv alBufferivFn;
+		public static PFN_alGetBufferf alGetBufferfFn;
+		public static PFN_alGetBuffer3f alGetBuffer3fFn;
+		public static PFN_alGetBufferfv alGetBufferfvFn;
+		public static PFN_alGetBufferi alGetBufferiFn;
+		public static PFN_alGetBuffer3i alGetBuffer3iFn;
+		public static PFN_alGetBufferiv alGetBufferivFn;
+
+		public delegate void* LoaderDelegate(StringView name);
+
+		static void InitFunctionPtrsStatic()
 		{
+#if !OPENAL_DYNLOAD
+
+			// ALC
+			alcCreateContextFn = => alcCreateContext;
+			alcMakeContextCurrentFn = => alcMakeContextCurrent;
+			alcProcessContextFn = => alcProcessContext;
+			alcSuspendContextFn = => alcSuspendContext;
+			alcDestroyContextFn = => alcDestroyContext;
+			alcGetCurrentContextFn = => alcGetCurrentContext;
+			alcGetContextsDeviceFn = => alcGetContextsDevice;
+			alcOpenDeviceFn = => alcOpenDevice;
+			alcCloseDeviceFn = => alcCloseDevice;
+			alcGetErrorFn = => alcGetError;
+			alcIsExtensionPresentFn = => alcIsExtensionPresent;
+			alcGetProcAddressFn = => alcGetProcAddress;
+			alcGetEnumValueFn = => alcGetEnumValue;
+			alcGetStringFn = => alcGetString;
+			alcGetIntegervFn = => alcGetIntegerv;
+			alcCaptureOpenDeviceFn = => alcCaptureOpenDevice;
+			alcCaptureCloseDeviceFn = => alcCaptureCloseDevice;
+			alcCaptureStartFn = => alcCaptureStart;
+			alcCaptureStopFn = => alcCaptureStop;
+			alcCaptureSamplesFn = => alcCaptureSamples;
+
+			// AL
+			alDopplerFactorFn = => alDopplerFactor;
+			alDopplerVelocityFn = => alDopplerVelocity;
+			alSpeedOfSoundFn = => alSpeedOfSound;
+			alDistanceModelFn = => alDistanceModel;
+			alEnableFn = => alEnable;
+			alDisableFn = => alDisable;
+			alIsEnabledFn = => alIsEnabled;
+			alGetStringFn = => alGetString;
+			alGetBooleanvFn = => alGetBooleanv;
+			alGetIntegervFn = => alGetIntegerv;
+			alGetFloatvFn = => alGetFloatv;
+			alGetDoublevFn = => alGetDoublev;
+			alGetBooleanFn = => alGetBoolean;
+			alGetIntegerFn = => alGetInteger;
+			alGetFloatFn = => alGetFloat;
+			alGetDoubleFn = => alGetDouble;
+			alGetErrorFn = => alGetError;
+			alIsExtensionPresentFn = => alIsExtensionPresent;
+			alGetProcAddressFn = => alGetProcAddress;
+			alGetEnumValueFn = => alGetEnumValue;
+			alListenerfFn = => alListenerf;
+			alListener3fFn = => alListener3f;
+			alListenerfvFn = => alListenerfv;
+			alListeneriFn = => alListeneri;
+			alListener3iFn = => alListener3i;
+			alListenerivFn = => alListeneriv;
+			alGetListenerfFn = => alGetListenerf;
+			alGetListener3fFn = => alGetListener3f;
+			alGetListenerfvFn = => alGetListenerfv;
+			alGetListeneriFn = => alGetListeneri;
+			alGetListener3iFn = => alGetListener3i;
+			alGetListenerivFn = => alGetListeneriv;
+			alGenSourcesFn = => alGenSources;
+			alDeleteSourcesFn = => alDeleteSources;
+			alIsSourceFn = => alIsSource;
+			alSourcefFn = => alSourcef;
+			alSource3fFn = => alSource3f;
+			alSourcefvFn = => alSourcefv;
+			alSourceiFn = => alSourcei;
+			alSource3iFn = => alSource3i;
+			alSourceivFn = => alSourceiv;
+			alGetSourcefFn = => alGetSourcef;
+			alGetSource3fFn = => alGetSource3f;
+			alGetSourcefvFn = => alGetSourcefv;
+			alGetSourceiFn = => alGetSourcei;
+			alGetSource3iFn = => alGetSource3i;
+			alGetSourceivFn = => alGetSourceiv;
+			alSourcePlayvFn = => alSourcePlayv;
+			alSourceStopvFn = => alSourceStopv;
+			alSourceRewindvFn = => alSourceRewindv;
+			alSourcePausevFn = => alSourcePausev;
+			alSourcePlayFn = => alSourcePlay;
+			alSourceStopFn = => alSourceStop;
+			alSourceRewindFn = => alSourceRewind;
+			alSourcePauseFn = => alSourcePause;
+			alSourceQueueBuffersFn = => alSourceQueueBuffers;
+			alSourceUnqueueBuffersFn = => alSourceUnqueueBuffers;
+			alGenBuffersFn = => alGenBuffers;
+			alDeleteBuffersFn = => alDeleteBuffers;
+			alIsBufferFn = => alIsBuffer;
+			alBufferDataFn = => alBufferData;
+			alBufferfFn = => alBufferf;
+			alBuffer3fFn = => alBuffer3f;
+			alBufferfvFn = => alBufferfv;
+			alBufferiFn = => alBufferi;
+			alBuffer3iFn = => alBuffer3i;
+			alBufferivFn = => alBufferiv;
+			alGetBufferfFn = => alGetBufferf;
+			alGetBuffer3fFn = => alGetBuffer3f;
+			alGetBufferfvFn = => alGetBufferfv;
+			alGetBufferiFn = => alGetBufferi;
+			alGetBuffer3iFn = => alGetBuffer3i;
+			alGetBufferivFn = => alGetBufferiv;
+#endif
+		}
+
+		static void InitFunctionPtrsDynamic(LoaderDelegate loader)
+		{
+			// ALC
+			alcCreateContextFn = (.)loader("alalcCreateContext");
+			alcMakeContextCurrentFn = (.)loader("alalcMakeContextCurrent");
+			alcProcessContextFn = (.)loader("alalcProcessContext");
+			alcSuspendContextFn = (.)loader("alalcSuspendContext");
+			alcDestroyContextFn = (.)loader("alalcDestroyContext");
+			alcGetCurrentContextFn = (.)loader("alalcGetCurrentContext");
+			alcGetContextsDeviceFn = (.)loader("alalcGetContextsDevice");
+			alcOpenDeviceFn = (.)loader("alalcOpenDevice");
+			alcCloseDeviceFn = (.)loader("alalcCloseDevice");
+			alcGetErrorFn = (.)loader("alalcGetError");
+			alcIsExtensionPresentFn = (.)loader("alalcIsExtensionPresent");
+			alcGetProcAddressFn = (.)loader("alalcGetProcAddress");
+			alcGetEnumValueFn = (.)loader("alalcGetEnumValue");
+			alcGetStringFn = (.)loader("alalcGetString");
+			alcGetIntegervFn = (.)loader("alalcGetIntegerv");
+			alcCaptureOpenDeviceFn = (.)loader("alalcCaptureOpenDevice");
+			alcCaptureCloseDeviceFn = (.)loader("alalcCaptureCloseDevice");
+			alcCaptureStartFn = (.)loader("alalcCaptureStart");
+			alcCaptureStopFn = (.)loader("alalcCaptureStop");
+			alcCaptureSamplesFn = (.)loader("alalcCaptureSamples");
+
+			// AL
+			alDopplerFactorFn = (.)loader("alDopplerFactor");
+			alDopplerVelocityFn = (.)loader("alDopplerVelocity");
+			alSpeedOfSoundFn = (.)loader("alSpeedOfSound");
+			alDistanceModelFn = (.)loader("alDistanceModel");
+			alEnableFn = (.)loader("alEnable");
+			alDisableFn = (.)loader("alDisable");
+			alIsEnabledFn = (.)loader("alIsEnabled");
+			alGetStringFn = (.)loader("alGetString");
+			alGetBooleanvFn = (.)loader("alGetBooleanv");
+			alGetIntegervFn = (.)loader("alGetIntegerv");
+			alGetFloatvFn = (.)loader("alGetFloatv");
+			alGetDoublevFn = (.)loader("alGetDoublev");
+			alGetBooleanFn = (.)loader("alGetBoolean");
+			alGetIntegerFn = (.)loader("alGetInteger");
+			alGetFloatFn = (.)loader("alGetFloat");
+			alGetDoubleFn = (.)loader("alGetDouble");
+			alGetErrorFn = (.)loader("alGetError");
+			alIsExtensionPresentFn = (.)loader("alIsExtensionPresent");
+			alGetProcAddressFn = (.)loader("alGetProcAddress");
+			alGetEnumValueFn = (.)loader("alGetEnumValue");
+			alListenerfFn = (.)loader("alListenerf");
+			alListener3fFn = (.)loader("alListener3f");
+			alListenerfvFn = (.)loader("alListenerfv");
+			alListeneriFn = (.)loader("alListeneri");
+			alListener3iFn = (.)loader("alListener3i");
+			alListenerivFn = (.)loader("alListeneriv");
+			alGetListenerfFn = (.)loader("alGetListenerf");
+			alGetListener3fFn = (.)loader("alGetListener3f");
+			alGetListenerfvFn = (.)loader("alGetListenerfv");
+			alGetListeneriFn = (.)loader("alGetListeneri");
+			alGetListener3iFn = (.)loader("alGetListener3i");
+			alGetListenerivFn = (.)loader("alGetListeneriv");
+			alGenSourcesFn = (.)loader("alGenSources");
+			alDeleteSourcesFn = (.)loader("alDeleteSources");
+			alIsSourceFn = (.)loader("alIsSource");
+			alSourcefFn = (.)loader("alSourcef");
+			alSource3fFn = (.)loader("alSource3f");
+			alSourcefvFn = (.)loader("alSourcefv");
+			alSourceiFn = (.)loader("alSourcei");
+			alSource3iFn = (.)loader("alSource3i");
+			alSourceivFn = (.)loader("alSourceiv");
+			alGetSourcefFn = (.)loader("alGetSourcef");
+			alGetSource3fFn = (.)loader("alGetSource3f");
+			alGetSourcefvFn = (.)loader("alGetSourcefv");
+			alGetSourceiFn = (.)loader("alGetSourcei");
+			alGetSource3iFn = (.)loader("alGetSource3i");
+			alGetSourceivFn = (.)loader("alGetSourceiv");
+			alSourcePlayvFn = (.)loader("alSourcePlayv");
+			alSourceStopvFn = (.)loader("alSourceStopv");
+			alSourceRewindvFn = (.)loader("alSourceRewindv");
+			alSourcePausevFn = (.)loader("alSourcePausev");
+			alSourcePlayFn = (.)loader("alSourcePlay");
+			alSourceStopFn = (.)loader("alSourceStop");
+			alSourceRewindFn = (.)loader("alSourceRewind");
+			alSourcePauseFn = (.)loader("alSourcePause");
+			alSourceQueueBuffersFn = (.)loader("alSourceQueueBuffers");
+			alSourceUnqueueBuffersFn = (.)loader("alSourceUnqueueBuffers");
+			alGenBuffersFn = (.)loader("alGenBuffers");
+			alDeleteBuffersFn = (.)loader("alDeleteBuffers");
+			alIsBufferFn = (.)loader("alIsBuffer");
+			alBufferDataFn = (.)loader("alBufferData");
+			alBufferfFn = (.)loader("alBufferf");
+			alBuffer3fFn = (.)loader("alBuffer3f");
+			alBufferfvFn = (.)loader("alBufferfv");
+			alBufferiFn = (.)loader("alBufferi");
+			alBuffer3iFn = (.)loader("alBuffer3i");
+			alBufferivFn = (.)loader("alBufferiv");
+			alGetBufferfFn = (.)loader("alGetBufferf");
+			alGetBuffer3fFn = (.)loader("alGetBuffer3f");
+			alGetBufferfvFn = (.)loader("alGetBufferfv");
+			alGetBufferiFn = (.)loader("alGetBufferi");
+			alGetBuffer3iFn = (.)loader("alGetBuffer3i");
+			alGetBufferivFn = (.)loader("alGetBufferiv");
+		}
+
+#if OPENAL_DYNLOAD
+		public const bool IS_DYNLIB = true;
+#else
+		public const bool IS_DYNLIB = false;
+#endif
+
+		public static Result<ALCdevice*, InitError> InitAL(LoaderDelegate loader = null)
+		{
+			//Internal.LoadSharedLibrary("openal");
+#if OPENAL_DYNLOAD
+			Runtime.Assert(loader != null);
+			InitFunctionPtrsDynamic(loader);
+#else
+			InitFunctionPtrsStatic();
+#endif
 			ALCcontext* ctx;
 			ALCdevice* device = null;
 
 			if (device == null)
-				device = alcOpenDevice(null);
+				device = alcOpenDeviceFn(null);
 
 			if (device == null)
 				return .Err(.Device);
 
-			ctx = alcCreateContext(device, null);
-			if (ctx == null || alcMakeContextCurrent(ctx) == ALC_FALSE)
+			ctx = alcCreateContextFn(device, null);
+			if (ctx == null || alcMakeContextCurrentFn(ctx) == ALC_FALSE)
 			{
 				if(ctx != null)
-					alcDestroyContext(ctx);
+					alcDestroyContextFn(ctx);
 
-				alcCloseDevice(device);
+				alcCloseDeviceFn(device);
 				return .Err(.Context);
 			}
 			return device;
@@ -798,15 +1316,15 @@ namespace OpenAL
 			ALCdevice *device;
 			ALCcontext *ctx;
 
-			ctx = alcGetCurrentContext();
+			ctx = alcGetCurrentContextFn();
 			if(ctx == null)
 			    return;
 
-			device = alcGetContextsDevice(ctx);
+			device = alcGetContextsDeviceFn(ctx);
 
-			alcMakeContextCurrent(null);
-			alcDestroyContext(ctx);
-			alcCloseDevice(device);
+			alcMakeContextCurrentFn(null);
+			alcDestroyContextFn(ctx);
+			alcCloseDeviceFn(device);
 		}
 	}
 }
