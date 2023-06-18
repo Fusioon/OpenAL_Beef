@@ -1177,26 +1177,26 @@ namespace OpenAL
 		static void InitFunctionPtrsDynamic(LoaderDelegate loader)
 		{
 			// ALC
-			alcCreateContextFn = (.)loader("alalcCreateContext");
-			alcMakeContextCurrentFn = (.)loader("alalcMakeContextCurrent");
-			alcProcessContextFn = (.)loader("alalcProcessContext");
-			alcSuspendContextFn = (.)loader("alalcSuspendContext");
-			alcDestroyContextFn = (.)loader("alalcDestroyContext");
-			alcGetCurrentContextFn = (.)loader("alalcGetCurrentContext");
-			alcGetContextsDeviceFn = (.)loader("alalcGetContextsDevice");
-			alcOpenDeviceFn = (.)loader("alalcOpenDevice");
-			alcCloseDeviceFn = (.)loader("alalcCloseDevice");
-			alcGetErrorFn = (.)loader("alalcGetError");
-			alcIsExtensionPresentFn = (.)loader("alalcIsExtensionPresent");
-			alcGetProcAddressFn = (.)loader("alalcGetProcAddress");
-			alcGetEnumValueFn = (.)loader("alalcGetEnumValue");
-			alcGetStringFn = (.)loader("alalcGetString");
-			alcGetIntegervFn = (.)loader("alalcGetIntegerv");
-			alcCaptureOpenDeviceFn = (.)loader("alalcCaptureOpenDevice");
-			alcCaptureCloseDeviceFn = (.)loader("alalcCaptureCloseDevice");
-			alcCaptureStartFn = (.)loader("alalcCaptureStart");
-			alcCaptureStopFn = (.)loader("alalcCaptureStop");
-			alcCaptureSamplesFn = (.)loader("alalcCaptureSamples");
+			alcCreateContextFn = (.)loader("alcCreateContext");
+			alcMakeContextCurrentFn = (.)loader("alcMakeContextCurrent");
+			alcProcessContextFn = (.)loader("alcProcessContext");
+			alcSuspendContextFn = (.)loader("alcSuspendContext");
+			alcDestroyContextFn = (.)loader("alcDestroyContext");
+			alcGetCurrentContextFn = (.)loader("alcGetCurrentContext");
+			alcGetContextsDeviceFn = (.)loader("alcGetContextsDevice");
+			alcOpenDeviceFn = (.)loader("alcOpenDevice");
+			alcCloseDeviceFn = (.)loader("alcCloseDevice");
+			alcGetErrorFn = (.)loader("alcGetError");
+			alcIsExtensionPresentFn = (.)loader("alcIsExtensionPresent");
+			alcGetProcAddressFn = (.)loader("alcGetProcAddress");
+			alcGetEnumValueFn = (.)loader("alcGetEnumValue");
+			alcGetStringFn = (.)loader("alcGetString");
+			alcGetIntegervFn = (.)loader("alcGetIntegerv");
+			alcCaptureOpenDeviceFn = (.)loader("alcCaptureOpenDevice");
+			alcCaptureCloseDeviceFn = (.)loader("alcCaptureCloseDevice");
+			alcCaptureStartFn = (.)loader("alcCaptureStart");
+			alcCaptureStopFn = (.)loader("alcCaptureStop");
+			alcCaptureSamplesFn = (.)loader("alcCaptureSamples");
 
 			// AL
 			alDopplerFactorFn = (.)loader("alDopplerFactor");
